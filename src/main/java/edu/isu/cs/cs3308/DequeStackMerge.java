@@ -20,6 +20,12 @@ public class DequeStackMerge {
      * @param from Stack which is merged into the bottom of the other stack.
      */
     public static <E> void dequeStackMerge(final Stack<E> into, Stack<E> from) {
-        throw new UnsupportedOperationException("Not Yet Implemented");
+        if(from != null || into != null)
+        {
+            from.transfer(into);
+
+
+        }
+
     }
 }

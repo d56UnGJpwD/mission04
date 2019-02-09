@@ -2,66 +2,140 @@ package edu.isu.cs.cs3308.structures.impl;
 
 import edu.isu.cs.cs3308.structures.RedBlueDoubleStack;
 
-public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack
+public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
 {
-    @Override
-    public void pushRed(Object element)
-    {
 
+    public class Node<E>
+    {
+        private E element;
+        private Node<E> next;
+
+        public void setNext(Node<E> next)
+        {
+            this.next = next;
+        }
+
+        public Node<E> getNext()
+        {
+            return next;
+        }
+
+        public E getElement()
+        {
+            return element;
+        }
+
+        public Node(E element, Node<E> next)
+        {
+            this.element = element;
+            this.next = next;
+        }
+    }
+
+    private int redSize;
+    private int blueSize;
+    private Node<E> redFirst;
+    private Node<E> blueFirst;
+
+
+    @Override
+    public void pushRed(E element)
+    {
+        if(element != null)
+        {
+            Node<E> old = redFirst;
+            redFirst = new Node(element, old);
+            redSize++;
+        }
     }
 
     @Override
-    public void pushBlue(Object element)
+    public void pushBlue(E element)
     {
-
+        if(element != null)
+        {
+            Node<E> old = blueFirst;
+            blueFirst = new Node(element, old);
+            blueSize++;
+        }
     }
 
     @Override
-    public Object popRed()
+    public E popRed()
     {
-        return null;
+        if(isRedEmpty()){
+            return null;
+        }
+        E value = redFirst.getElement();
+        redFirst = redFirst.next;
+        redSize--;
+        return value;
     }
 
     @Override
-    public Object popBlue()
+    public E popBlue()
     {
-        return null;
+        if(isBlueEmpty()){
+            return null;
+        }
+        E value = blueFirst.getElement();
+        blueFirst = blueFirst.next;
+        blueSize--;
+        return value;
     }
 
     @Override
-    public Object peekRed()
+    public E peekRed()
     {
-        return null;
+        if(isRedEmpty()){
+            return null;
+        }
+        else{
+            return redFirst.getElement();
+        }
     }
 
     @Override
-    public Object peekBlue()
+    public E peekBlue()
     {
-        return null;
+        if(isBlueEmpty()){
+            return null;
+        }
+        else{
+            return blueFirst.getElement();
+        }
     }
 
     @Override
     public int sizeRed()
     {
-        return 0;
+        return redSize;
     }
 
     @Override
     public int sizeBlue()
     {
-        return 0;
+        return blueSize;
     }
 
     @Override
     public boolean isRedEmpty()
     {
-        return false;
+        if(sizeRed() > 0)
+        {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean isBlueEmpty()
     {
-        return false;
+        if(sizeBlue() > 0)
+        {
+            return false;
+        }
+        return true;
     }
 
 }

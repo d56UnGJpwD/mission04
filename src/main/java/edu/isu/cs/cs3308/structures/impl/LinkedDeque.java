@@ -7,6 +7,7 @@ import edu.isu.cs.cs3308.structures.impl.LinkedStack;
 public class LinkedDeque<E> implements Deque<E>
 {
 
+    //doubly linked node class
     public class Node<E> {
         private E element;
         private Node<E> next;
@@ -39,20 +40,21 @@ public class LinkedDeque<E> implements Deque<E>
     private Node<E> trailer;
     private int size = 0;
 
+    //this is essentially a doubly linked list
     public LinkedDeque(){
         header = new Node<>(null, null, null);
         trailer = new Node<>(null,header,null);
         header.setNext(trailer);
     }
 
-
+    //returns the first node
     public E peek(){
         if(isEmpty()){
             return null;
         }
         return header.getNext().getElement();
     }
-
+    //transfers from one queue into the provided queue and does empty the source queue
     public void transfer(Queue<E> into)
     {
         if(into != null)
@@ -65,7 +67,7 @@ public class LinkedDeque<E> implements Deque<E>
         }
 
     }
-
+    //merges both queues but does not empty the source queue
     public void merge(Queue<E> from)
     {
         if(from == null)
@@ -90,35 +92,36 @@ public class LinkedDeque<E> implements Deque<E>
         }
     }
 
+    //view the last element in the deque
     public E peekLast(){
         if(isEmpty()){
             return null;
         }
         return trailer.getPrev().getElement();
     }
-
+    //add to the front
     public void offerFirst(E element){
         addBetween(element, header, header.getNext());
     }
-
+    //add to the last
     public void offer(E element){
         addBetween(element, trailer.getPrev(), trailer);
     }
-
+    //remove the first node
     public E poll(){
         if(isEmpty()){
             return null;
         }
         return remove(0);
     }
-
+    //remove the last node
     public E pollLast(){
         if(isEmpty()){
             return null;
         }
         return remove(size -1);
     }
-
+    //helper function that handles all adding
     private void addBetween(E e, Node<E> predecessor, Node<E> successor){
         if(e != null){
             Node<E> newest = new Node<>(e, predecessor, successor);
@@ -128,7 +131,7 @@ public class LinkedDeque<E> implements Deque<E>
         }
     }
 
-
+    //my remove helper function
     public E remove(int index){
         if(index >= 0 && index < size){
             Node<E> removed = getNode(index);
@@ -142,7 +145,7 @@ public class LinkedDeque<E> implements Deque<E>
         }
         return null;
     }
-
+    //uses a stack to reverse a queue
     public void reverse()
     {
         Stack<E> stack = new LinkedStack<>();
@@ -156,7 +159,7 @@ public class LinkedDeque<E> implements Deque<E>
         }
 
     }
-
+    //my node searcher function
     private Node<E> getNode(int index){
         if(index >= 0 && index < size){
             Node<E> current = header;
@@ -172,15 +175,15 @@ public class LinkedDeque<E> implements Deque<E>
         }
         return null;
     }
-
+    //size of the deque
     public int size(){
         return size;
     }
-
+    //empty checker
     public boolean isEmpty(){
         return size == 0;
     }
-
+    //prints contents of queue
     public void printQueue(){
         Node<E> current = header.next;
         while(current.next != null){

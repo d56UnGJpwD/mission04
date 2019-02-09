@@ -4,7 +4,7 @@ import edu.isu.cs.cs3308.structures.RedBlueDoubleStack;
 
 public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
 {
-
+    //singly linked node class
     public class Node<E>
     {
         private E element;
@@ -32,12 +32,14 @@ public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
         }
     }
 
+    //there has to be a size for both red and blue
+    //along with a first node for each as well
     private int redSize;
     private int blueSize;
     private Node<E> redFirst;
     private Node<E> blueFirst;
 
-
+    //adds a new node to the front of red
     @Override
     public void pushRed(E element)
     {
@@ -48,7 +50,7 @@ public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
             redSize++;
         }
     }
-
+    //adds a new node to the front of blue
     @Override
     public void pushBlue(E element)
     {
@@ -59,7 +61,7 @@ public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
             blueSize++;
         }
     }
-
+    //removes the first node of red
     @Override
     public E popRed()
     {
@@ -71,7 +73,7 @@ public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
         redSize--;
         return value;
     }
-
+    //removes the first node of blue
     @Override
     public E popBlue()
     {
@@ -83,7 +85,7 @@ public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
         blueSize--;
         return value;
     }
-
+    //looks at the first node of red
     @Override
     public E peekRed()
     {
@@ -94,7 +96,7 @@ public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
             return redFirst.getElement();
         }
     }
-
+    //looks at the first node of blue
     @Override
     public E peekBlue()
     {
@@ -105,19 +107,19 @@ public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
             return blueFirst.getElement();
         }
     }
-
+    //returns size of red
     @Override
     public int sizeRed()
     {
         return redSize;
     }
-
+    //returns size of blue
     @Override
     public int sizeBlue()
     {
         return blueSize;
     }
-
+    //checks if red is empty
     @Override
     public boolean isRedEmpty()
     {
@@ -127,7 +129,7 @@ public class RedBlueDoubleStackImpl<E> implements RedBlueDoubleStack<E>
         }
         return true;
     }
-
+    //returns true if blue is empty
     @Override
     public boolean isBlueEmpty()
     {

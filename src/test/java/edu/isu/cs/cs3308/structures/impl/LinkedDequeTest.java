@@ -243,7 +243,7 @@ public class LinkedDequeTest {
         assertTrue("Deque on which transfer is called should be empty after the transfer", fixture.isEmpty());
         assertFalse("Other deque should not be empty after transfer", other.isEmpty());
 
-        for (int i = 1; i <= other.size(); i++) {
+        for (int i = other.size(); i >= 1; i--) {
             assertEquals("Order in transfer to deque is not reversed", new Integer(i), other.poll());
         }
     }
@@ -272,7 +272,7 @@ public class LinkedDequeTest {
         fixture.reverse();
         assertFalse("Deque on which reverse is called was empty after reverse", fixture.isEmpty());
 
-        for (int i = 1; i <= fixture.size(); i++) {
+        for (int i = fixture.size(); i >= 1; i--) {
             assertEquals("Deque order not reversed after reverse call", new Integer(i), fixture.poll());
         }
     }
@@ -343,8 +343,8 @@ public class LinkedDequeTest {
         assertFalse(other.isEmpty());
         fixture.merge(other);
         assertFalse("Merge empties from queue", other.isEmpty());
-	for (int i = 1; i <= 10; i++)
-	    assertEquals("Other queue order not restored", new Integer(i), other.poll());
+        for (int i = 1; i <= 10; i++)
+            assertEquals("Other queue order not restored", new Integer(i), other.poll());
     }
 
     /**
